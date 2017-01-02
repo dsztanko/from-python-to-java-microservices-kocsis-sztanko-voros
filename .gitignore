@@ -23,7 +23,6 @@
 
 ## File-based project format:
 *.iws
-
 ## Plugin-specific files:
 
 # IntelliJ
@@ -42,3 +41,5 @@ crashlytics-build.properties
 fabric.properties
 
 .idea/
+
+**/target/*
