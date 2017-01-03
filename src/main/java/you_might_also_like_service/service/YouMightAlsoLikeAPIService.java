@@ -24,7 +24,7 @@ public class YouMightAlsoLikeAPIService {
         userDao.save(accessToken, userID, item);
     }
 
-    public JSONObject getAllByItems(String accessToken, String userId) {
+    public JSONObject getRecommendations(String accessToken, String userId) {
         ArrayList allusers = userDao.selectByCartItems(accessToken, userId);
         User user = userDao.find(accessToken, userId);
         return null;
