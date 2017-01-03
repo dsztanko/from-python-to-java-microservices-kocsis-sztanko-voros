@@ -2,6 +2,7 @@ package you_might_also_like_service.controller;
 
 import spark.Request;
 import spark.Response;
+import you_might_also_like_service.model.User;
 import you_might_also_like_service.service.YouMightAlsoLikeAPIService;
 
 public class YouMightAlsoLikeAPIController {
@@ -20,7 +21,11 @@ public class YouMightAlsoLikeAPIController {
     }
 
     public String saveToDao(Request request, Response response) {
-        return "save to dao";
+        String accessToken = request.queryParams(ACCESS_TOKEN_PARAM_KEY);
+        String userId = request.queryParams(USER_ID_PARAM_KEY);
+        String cartItemId = request.queryParams(CART_ITEM_ID_PARAM_KEY);
+        return null;
+//        return apiService.saveUser(accessToken, userId, cartItemId);
     }
 
     public String selectByCartItemsFromDao(Request request, Response response) {
