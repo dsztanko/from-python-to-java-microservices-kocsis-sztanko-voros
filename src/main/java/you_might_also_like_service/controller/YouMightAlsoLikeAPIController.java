@@ -2,7 +2,6 @@ package you_might_also_like_service.controller;
 
 import spark.Request;
 import spark.Response;
-import you_might_also_like_service.model.User;
 import you_might_also_like_service.service.YouMightAlsoLikeAPIService;
 
 public class YouMightAlsoLikeAPIController {
