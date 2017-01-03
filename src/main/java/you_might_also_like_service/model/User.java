@@ -15,4 +15,12 @@ public class User {
     public ArrayList getItems() {
         return items;
     }
+
+    public String getAccessToken() {
+        return accessToken;
+    }
+
+    public String getUserID() {
+        return userID;
+    }
 }
