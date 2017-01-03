@@ -26,7 +26,7 @@ public class YouMightAlsoLikeServer {
         port(60002);
 
         // --- MAPPINGS ---
-        get("api/preferences/status", application.controller::status);
+        get("/api/preferences/status", application.controller::status);
         get("/api/preferences/save", application.controller::saveToDao);
         get("/api/preferences/select", application.controller::selectByCartItemsFromDao);
 
