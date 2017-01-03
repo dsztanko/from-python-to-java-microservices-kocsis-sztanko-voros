@@ -3,6 +3,7 @@ import you_might_also_like_service.dao.UserDao;
 import you_might_also_like_service.model.User;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class UserDaoMem implements UserDao{
     private static UserDaoMem ourInstance = new UserDaoMem();
@@ -18,8 +19,18 @@ public class UserDaoMem implements UserDao{
     }
 
     @Override
-    public void save(User user) {
-        DATA.add(user);
+    public void save(String accessToken, String userID, String item) {
+        Boolean addBoolean = true;
+        for (User user: DATA) {
+            if (user.getAccessToken().equals(accessToken) && user.getUserID().equals(userID)) {
+                user.getItems().add(item);
+                addBoolean = false;
+            }
+        }
+        if (addBoolean) {
+            User user = new User(accessToken, userID, new ArrayList<>(Arrays.asList(item)));
+            DATA.add(user);
+        }
     }
 
     @Override
