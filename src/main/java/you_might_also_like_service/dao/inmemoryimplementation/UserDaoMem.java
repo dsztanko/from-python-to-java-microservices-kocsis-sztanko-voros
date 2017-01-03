@@ -20,21 +20,19 @@ public class UserDaoMem implements UserDao{
 
     @Override
     public void save(String accessToken, String userID, String item) {
-        Boolean addBoolean = true;
-        for (User user: DATA) {
-            if (user.getAccessToken().equals(accessToken) && user.getUserID().equals(userID)) {
-                user.getItems().add(item);
-                addBoolean = false;
-            }
-        }
-        if (addBoolean) {
-            User user = new User(accessToken, userID, new ArrayList<>(Arrays.asList(item)));
+        User user = find(accessToken, userID);
+        if (user == null) {
+            user = new User(accessToken, userID, new ArrayList<>(Arrays.asList(item)));
             DATA.add(user);
+        }
+        else {
+            user.getItems().add(item);
         }
     }
 
     @Override
-    public ArrayList selectByCartItems(ArrayList<String> items) {
+    public ArrayList selectByCartItems(String accessToken, String userId) {
+        ArrayList<String> items = find(accessToken, userId).getItems();
         ArrayList users = new ArrayList();
         for (User user : DATA) {
             for (String item: items) {
@@ -45,5 +43,16 @@ public class UserDaoMem implements UserDao{
             }
         }
         return users;
+    }
+
+    @Override
+    public User find(String accessToken, String userId) {
+        User user = null;
+        for (User element: DATA) {
+            if (element.getAccessToken().equals(accessToken) && element.getUserID().equals(userId)) {
+                user = element;
+            }
+        }
+        return user;
     }
 }
