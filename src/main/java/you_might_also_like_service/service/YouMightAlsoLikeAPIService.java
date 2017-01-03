@@ -2,7 +2,6 @@ package you_might_also_like_service.service;
 
 import you_might_also_like_service.dao.UserDao;
 import you_might_also_like_service.dao.inmemoryimplementation.UserDaoMem;
-import you_might_also_like_service.model.User;
 
 import java.util.ArrayList;
 
@@ -19,8 +18,8 @@ public class YouMightAlsoLikeAPIService {
         userDao = UserDaoMem.getInstance();
     }
 
-    public void saveUser(User user) {
-        userDao.save(user);
+    public void saveUser(String accessToken, String userID, String item) {
+        userDao.save(accessToken, userID, item);
     }
 
     public ArrayList getAllByItems(ArrayList items) {
