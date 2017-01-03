@@ -3,7 +3,8 @@ package you_might_also_like_service.model;
 import java.util.ArrayList;
 
 public class User {
-    private String accessToken, userID;
+    private String accessToken;
+    private String userID;
     private ArrayList<String> items;
 
     public User(String accessToken, String userID, ArrayList<String> items) {
@@ -12,7 +13,7 @@ public class User {
         this.items = items;
     }
 
-    public ArrayList getItems() {
+    public ArrayList<String> getItems() {
         return items;
     }
 
