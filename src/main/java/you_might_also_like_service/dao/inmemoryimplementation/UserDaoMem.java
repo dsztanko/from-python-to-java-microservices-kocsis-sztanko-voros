@@ -4,6 +4,8 @@ import you_might_also_like_service.model.User;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
 
 public class UserDaoMem implements UserDao{
     private static UserDaoMem ourInstance = new UserDaoMem();
@@ -54,5 +56,20 @@ public class UserDaoMem implements UserDao{
             }
         }
         return user;
+    }
+
+    @Override
+    public HashMap<String, Integer> selectUniqueItems(String accessToken) {
+        HashSet <String> uniqueItemsSet= new HashSet<>();
+        for (User user: DATA) {
+            if (user.getAccessToken().equals(accessToken)) {
+                uniqueItemsSet.addAll(user.getItems());
+            }
+        }
+        HashMap <String, Integer> uniqueItemsMap = new HashMap<>();
+        for (String id: uniqueItemsSet) {
+            uniqueItemsMap.put(id, 0);
+        }
+        return uniqueItemsMap;
     }
 }
