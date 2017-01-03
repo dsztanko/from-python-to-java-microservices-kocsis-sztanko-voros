@@ -28,6 +28,9 @@ public class YouMightAlsoLikeAPIController {
     }
 
     public String selectByCartItemsFromDao(Request request, Response response) {
-        return "select by";
+        String accessToken = request.queryParams(ACCESS_TOKEN_PARAM_KEY);
+        String userId = request.queryParams(USER_ID_PARAM_KEY);
+        apiService.getRecommendations(accessToken, userId);
+        return "Select done";
     }
 }
