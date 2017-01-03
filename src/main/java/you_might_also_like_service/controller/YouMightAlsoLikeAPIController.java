@@ -24,7 +24,8 @@ public class YouMightAlsoLikeAPIController {
         String accessToken = request.queryParams(ACCESS_TOKEN_PARAM_KEY);
         String userId = request.queryParams(USER_ID_PARAM_KEY);
         String cartItemId = request.queryParams(CART_ITEM_ID_PARAM_KEY);
-        return apiService.saveUser(accessToken, userId, cartItemId);
+        apiService.saveUser(accessToken, userId, cartItemId);
+        return "User saved";
     }
 
     public String selectByCartItemsFromDao(Request request, Response response) {
