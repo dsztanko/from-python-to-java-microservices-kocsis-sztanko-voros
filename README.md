@@ -24,12 +24,12 @@ Parameters that needs to be added: accessToken, userId
 >Example: http://localhost:60002/api/preferences/select?accessToken=page1&userId=user1
 
 Both routes have parameters which has to be added to the basic URL with addParams() method. Access token is chosen by developers. Use always the same access token if you'd like to get back valid recommendations. Access token identifies your web page.
-#####Guide to use it in the web shop procejt
+#####Guide to use it in the web shop project
 Building and triggering URL is advised every time when 'Add to cart' button is clicked. Saving stores Users and updates their carts, meanwhile select returns a JSON file with the following format: 
 
 {"recommendations": ["5", "2", "1"]}
 
-JSON gives back sorted ids (product_id, friend_id). The first one is the most relevant suggestion to the user. The number of return values can be changed in the codebase.
+JSON gives back sorted ids (product_id, friend_id). The first one is the most relevant suggestion to the user. The number of return values can be changed in the codebase. If there's not relevant amount of data in the storage, an empty list will be returned.
 
 #####What's next - further development
 
@@ -39,4 +39,5 @@ JSON gives back sorted ids (product_id, friend_id). The first one is the most re
 ######In case of upcoming questions find our table by the door. Thank you for using our very first MC!
 
 ###You Might Also Like it!
+###Cheers!
 
