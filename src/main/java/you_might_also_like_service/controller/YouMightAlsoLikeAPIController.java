@@ -16,7 +16,8 @@ public class YouMightAlsoLikeAPIController {
     }
 
     public String status(Request request, Response response) {
-        return "ok";
+        response.status(200);
+        return "Server runs.";
     }
 
     public String saveToDao(Request request, Response response) throws NullPointerException{
@@ -24,9 +25,11 @@ public class YouMightAlsoLikeAPIController {
         String userId = request.queryParams(USER_ID_PARAM_KEY);
         String cartItemId = request.queryParams(CART_ITEM_ID_PARAM_KEY);
         if (accessToken.isEmpty() || userId.isEmpty() || cartItemId.isEmpty()) {
-            return "Missing parameter in URL";
+            response.status(400);
+            return "Missing parameter in URL, HTTP status error: " + response.status();
         }
         apiService.saveUser(accessToken, userId, cartItemId);
+        response.status(200);
         return "Item successfully saved";
     }
 
@@ -34,8 +37,10 @@ public class YouMightAlsoLikeAPIController {
         String accessToken = request.queryParams(ACCESS_TOKEN_PARAM_KEY);
         String userId = request.queryParams(USER_ID_PARAM_KEY);
         if (accessToken.isEmpty() || userId.isEmpty()) {
-            return "Missing parameter in URL";
+            response.status(400);
+            return "Missing parameter in URL, HTTP status error: " + response.status();
         }
+        response.status(200);
         return apiService.getRecommendations(accessToken, userId).toString();
     }
 }
