@@ -5,14 +5,12 @@ import you_might_also_like_service.dao.UserDao;
 import you_might_also_like_service.dao.inmemoryimplementation.UserDaoMem;
 import you_might_also_like_service.model.User;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 public class YouMightAlsoLikeAPIService {
     private static YouMightAlsoLikeAPIService ourInstance = new YouMightAlsoLikeAPIService();
     private static final int BASE_INDEX = 3;
+    private static final int RECOMMENDATION_RANGE = 4;
 
     public static YouMightAlsoLikeAPIService getInstance() {
         return ourInstance;
@@ -54,8 +52,9 @@ public class YouMightAlsoLikeAPIService {
             uniqueItems.entrySet().stream()
                     .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
                     .forEachOrdered(x -> resultHM.put(x.getKey(), x.getValue()));
-
-            json = new JSONObject().put("recommendations", resultHM.keySet());
+            Set resultS = resultHM.keySet();
+            Integer range = (resultS.size() < RECOMMENDATION_RANGE) ? resultS.size() : RECOMMENDATION_RANGE;
+            json = new JSONObject().put("recommendations", new ArrayList<>(resultS).subList(0, range));
         } catch (NullPointerException e) {
             json = new JSONObject().put("recommendations", rec);
         }
