@@ -28,7 +28,7 @@ public class UserDaoMem implements UserDao{
     public void save(String accessToken, String userID, String item) {
         User user = find(accessToken, userID);
         if (user == null) {
-            user = new User(accessToken, userID, new ArrayList<>(Arrays.asList(item)));
+            user = new User(accessToken, userID, new HashSet<>(Arrays.asList(item)));
             DATA.add(user);
         }
         else {
@@ -37,8 +37,8 @@ public class UserDaoMem implements UserDao{
     }
 
     @Override
-    public ArrayList<User> selectByCartItems(String accessToken, String userId) {
-        ArrayList<String> items = find(accessToken, userId).getItems();
+    public ArrayList<User> selectByCartItems(String accessToken, String userId) throws NullPointerException{
+        HashSet<String> items = find(accessToken, userId).getItems();
         ArrayList users = new ArrayList();
         for (User user : DATA) {
             for (String item: items) {
@@ -52,7 +52,7 @@ public class UserDaoMem implements UserDao{
     }
 
     @Override
-    public User find(String accessToken, String userId) {
+    public User find(String accessToken, String userId) throws NullPointerException {
         User user = null;
         for (User element: DATA) {
             if (element.getAccessToken().equals(accessToken) && element.getUserID().equals(userId)) {
@@ -63,7 +63,7 @@ public class UserDaoMem implements UserDao{
     }
 
     @Override
-    public HashMap<String, Integer> selectUniqueItems(String accessToken, User specUser) {
+    public HashMap<String, Integer> selectUniqueItems(String accessToken, User specUser) throws NullPointerException {
         HashSet <String> uniqueItemsSet= new HashSet<>();
         for (User user: selectByCartItems(accessToken, specUser.getUserID())) {
             if (user.getAccessToken().equals(accessToken)) {
