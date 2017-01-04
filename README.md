@@ -36,6 +36,7 @@ JSON gives back sorted ids (product_id, friend_id). The first one is the most re
 1. Storing in database (JDBC)
 2. SQL operations instead of code logic.
 3. Use of more complicated algorithms, data mining.
+
 #####In case of upcoming questions find our table by the door. Thank you for using our very first MC!
 
 ###You Might Also Like it!
