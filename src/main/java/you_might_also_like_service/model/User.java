@@ -1,19 +1,19 @@
 package you_might_also_like_service.model;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 
 public class User {
     private String accessToken;
     private String userID;
-    private ArrayList<String> items;
+    private HashSet<String> items;
 
-    public User(String accessToken, String userID, ArrayList<String> items) {
+    public User(String accessToken, String userID, HashSet<String> items) {
         this.accessToken = accessToken;
         this.userID = userID;
         this.items = items;
     }
 
-    public ArrayList<String> getItems() {
+    public HashSet<String> getItems() {
         return items;
     }
 
