@@ -47,29 +47,29 @@ public class YouMightAlsoLikeAPIService {
         return json;
     }
 
-    public static void main(String[] args) {
-        HashMap<String, Integer> al;
-        UserDaoMem a = UserDaoMem.getInstance();
-        a.save("page1", "user1", "1");
-
-        a.save("page2", "user1", "2");
-
-        a.save("page1", "user1", "3");
-
-        a.save("page1", "user2", "1");
-        a.save("page1", "user2", "4");
-        a.save("page1", "user2", "5");
-
-        a.save("page1", "user3", "1");
-        a.save("page1", "user3", "2");
-        a.save("page1", "user3", "8");
-        a.save("page1", "user3", "5");
-
-        a.save("page1", "user4", "a");
-        a.save("page1", "user4", "b");
-        a.save("page1", "user4", "c");
-        YouMightAlsoLikeAPIService b = new YouMightAlsoLikeAPIService();
-        System.out.println(b.getRecommendations("page1", "user1"));
+//    public static void main(String[] args) {
+//        HashMap<String, Integer> al;
+//        UserDaoMem a = UserDaoMem.getInstance();
+//        a.save("page1", "user1", "1");
+//
+//        a.save("page2", "user1", "2");
+//
+//        a.save("page1", "user1", "3");
+//
+//        a.save("page1", "user2", "1");
+//        a.save("page1", "user2", "4");
+//        a.save("page1", "user2", "5");
+//
+//        a.save("page1", "user3", "1");
+//        a.save("page1", "user3", "2");
+//        a.save("page1", "user3", "8");
+//        a.save("page1", "user3", "5");
+//
+//        a.save("page1", "user4", "a");
+//        a.save("page1", "user4", "b");
+//        a.save("page1", "user4", "c");
+//        YouMightAlsoLikeAPIService b = new YouMightAlsoLikeAPIService();
+//        System.out.println(b.getRecommendations("page1", "user1"));
 //        System.out.println(a.selectByCartItems("page1", "user1"));
     }
 }
