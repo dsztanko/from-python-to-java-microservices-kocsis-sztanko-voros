@@ -19,18 +19,23 @@ public class YouMightAlsoLikeAPIController {
         return "ok";
     }
 
-    public String saveToDao(Request request, Response response) {
+    public String saveToDao(Request request, Response response) throws NullPointerException{
         String accessToken = request.queryParams(ACCESS_TOKEN_PARAM_KEY);
         String userId = request.queryParams(USER_ID_PARAM_KEY);
         String cartItemId = request.queryParams(CART_ITEM_ID_PARAM_KEY);
+        if (accessToken.isEmpty() || userId.isEmpty() || cartItemId.isEmpty()) {
+            return "Missing parameter in URL";
+        }
         apiService.saveUser(accessToken, userId, cartItemId);
-        return "User saved";
+        return "Item successfully saved";
     }
 
     public String selectByCartItemsFromDao(Request request, Response response) {
         String accessToken = request.queryParams(ACCESS_TOKEN_PARAM_KEY);
         String userId = request.queryParams(USER_ID_PARAM_KEY);
-        apiService.getRecommendations(accessToken, userId);
-        return "Select done";
+        if (accessToken.isEmpty() || userId.isEmpty()) {
+            return "Missing parameter in URL";
+        }
+        return apiService.getRecommendations(accessToken, userId).toString();
     }
 }
