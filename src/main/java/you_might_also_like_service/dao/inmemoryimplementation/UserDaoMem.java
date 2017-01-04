@@ -14,6 +14,10 @@ public class UserDaoMem implements UserDao{
         return ourInstance;
     }
 
+    public ArrayList<User> getDATA() {
+        return DATA;
+    }
+
     private ArrayList<User> DATA;
 
     private UserDaoMem() {
@@ -33,7 +37,7 @@ public class UserDaoMem implements UserDao{
     }
 
     @Override
-    public ArrayList selectByCartItems(String accessToken, String userId) {
+    public ArrayList<User> selectByCartItems(String accessToken, String userId) {
         ArrayList<String> items = find(accessToken, userId).getItems();
         ArrayList users = new ArrayList();
         for (User user : DATA) {
@@ -59,16 +63,18 @@ public class UserDaoMem implements UserDao{
     }
 
     @Override
-    public HashMap<String, Integer> selectUniqueItems(String accessToken) {
+    public HashMap<String, Integer> selectUniqueItems(String accessToken, User specUser) {
         HashSet <String> uniqueItemsSet= new HashSet<>();
-        for (User user: DATA) {
+        for (User user: selectByCartItems(accessToken, specUser.getUserID())) {
             if (user.getAccessToken().equals(accessToken)) {
                 uniqueItemsSet.addAll(user.getItems());
             }
         }
         HashMap <String, Integer> uniqueItemsMap = new HashMap<>();
         for (String id: uniqueItemsSet) {
-            uniqueItemsMap.put(id, 0);
+            if (!specUser.getItems().contains(id)) {
+                uniqueItemsMap.put(id, 0);
+            }
         }
         return uniqueItemsMap;
     }
