@@ -30,35 +30,30 @@ public class YouMightAlsoLikeAPIService {
 
     public JSONObject getRecommendations(String accessToken, String userId) {
         JSONObject json;
-        ArrayList rec = new ArrayList();
-        try {
-            ArrayList<User> allUsers = userDao.selectByCartItems(accessToken, userId);
-            User specUser = userDao.find(accessToken, userId);
-            HashMap<String, Integer> uniqueItems = userDao.selectUniqueItems(specUser.getAccessToken(), specUser);
-            for (User user : allUsers) {
-                Integer power = -1;
-                for (String item : user.getItems()) {
-                    if (specUser.getItems().contains(item)) {
-                        power++;
-                    }
-                }
-                for (String item : user.getItems()) {
-                    if (!specUser.getItems().contains(item)) {
-                        uniqueItems.put(item, (int) (uniqueItems.get(item) + Math.pow(BASE_INDEX, power)));
-                    }
+        ArrayList<User> allUsers = userDao.selectByCartItems(accessToken, userId);
+        User specUser = userDao.find(accessToken, userId);
+        HashMap<String, Integer> uniqueItems = userDao.selectUniqueItems(specUser.getAccessToken(), specUser);
+        for (User user : allUsers) {
+            Integer power = -1;
+            for (String item : user.getItems()) {
+                if (specUser.getItems().contains(item)) {
+                    power++;
                 }
             }
-
-            Map<String, Integer> resultHM = new LinkedHashMap<>();
-
-            uniqueItems.entrySet().stream()
-                    .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
-                    .forEachOrdered(x -> resultHM.put(x.getKey(), x.getValue()));
-
-            json = new JSONObject().put("recommendations", resultHM.keySet());
-        } catch (NullPointerException e) {
-            json = new JSONObject().put("recommendations", rec);
+            for (String item : user.getItems()) {
+                if (!specUser.getItems().contains(item)) {
+                    uniqueItems.put(item, (int) (uniqueItems.get(item) + Math.pow(BASE_INDEX, power)));
+                }
+            }
         }
+
+        Map<String, Integer> resultHM = new LinkedHashMap<>();
+
+        uniqueItems.entrySet().stream()
+                .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
+                .forEachOrdered(x -> resultHM.put(x.getKey(), x.getValue()));
+
+        json = new JSONObject().put("recommendations", resultHM.keySet());
         return json;
     }
 

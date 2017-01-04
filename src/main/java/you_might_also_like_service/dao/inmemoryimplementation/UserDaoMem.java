@@ -37,22 +37,26 @@ public class UserDaoMem implements UserDao{
     }
 
     @Override
-    public ArrayList<User> selectByCartItems(String accessToken, String userId) throws NullPointerException{
-        HashSet<String> items = find(accessToken, userId).getItems();
+    public ArrayList<User> selectByCartItems(String accessToken, String userId) {
         ArrayList users = new ArrayList();
-        for (User user : DATA) {
-            for (String item: items) {
-                if (user.getItems().contains(item)) {
-                    users.add(user);
-                    break;
+        try {
+            HashSet<String> items = find(accessToken, userId).getItems();
+            for (User user : DATA) {
+                for (String item : items) {
+                    if (user.getItems().contains(item)) {
+                        users.add(user);
+                        break;
+                    }
                 }
             }
+        } catch (NullPointerException e) {
+//            no access token and user ID matched
         }
         return users;
     }
 
     @Override
-    public User find(String accessToken, String userId) throws NullPointerException {
+    public User find(String accessToken, String userId) {
         User user = null;
         for (User element: DATA) {
             if (element.getAccessToken().equals(accessToken) && element.getUserID().equals(userId)) {
@@ -63,7 +67,7 @@ public class UserDaoMem implements UserDao{
     }
 
     @Override
-    public HashMap<String, Integer> selectUniqueItems(String accessToken, User specUser) throws NullPointerException {
+    public HashMap<String, Integer> selectUniqueItems(String accessToken, User specUser) {
         HashSet <String> uniqueItemsSet= new HashSet<>();
         for (User user: selectByCartItems(accessToken, specUser.getUserID())) {
             if (user.getAccessToken().equals(accessToken)) {
