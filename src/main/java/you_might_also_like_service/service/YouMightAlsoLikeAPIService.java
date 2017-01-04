@@ -29,49 +29,62 @@ public class YouMightAlsoLikeAPIService {
     }
 
     public JSONObject getRecommendations(String accessToken, String userId) {
-        ArrayList<User> allUsers = userDao.selectByCartItems(accessToken, userId);
-        User specUser = userDao.find(accessToken, userId);
-        HashMap<String, Integer> uniqueItems = userDao.selectUniqueItems(specUser.getAccessToken(), specUser);
-        for (User user : allUsers) {
-            Integer power = -1;
-            for (String item : user.getItems()) {
-                if (specUser.getItems().contains(item)) {
-                    power++;
+        JSONObject json;
+        ArrayList rec = new ArrayList();
+        try {
+            ArrayList<User> allUsers = userDao.selectByCartItems(accessToken, userId);
+            User specUser = userDao.find(accessToken, userId);
+            HashMap<String, Integer> uniqueItems = userDao.selectUniqueItems(specUser.getAccessToken(), specUser);
+            for (User user : allUsers) {
+                Integer power = -1;
+                for (String item : user.getItems()) {
+                    if (specUser.getItems().contains(item)) {
+                        power++;
+                    }
+                }
+                for (String item : user.getItems()) {
+                    if (!specUser.getItems().contains(item)) {
+                        uniqueItems.put(item, (int) (uniqueItems.get(item) + Math.pow(BASE_INDEX, power)));
+                    }
                 }
             }
-            for (String item : user.getItems()) {
-                if (!specUser.getItems().contains(item)) {
-                    uniqueItems.put(item, (int) (uniqueItems.get(item) + Math.pow(BASE_INDEX, power)));
-                }
-            }
+
+            Map<String, Integer> resultHM = new LinkedHashMap<>();
+
+            uniqueItems.entrySet().stream()
+                    .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
+                    .forEachOrdered(x -> resultHM.put(x.getKey(), x.getValue()));
+
+            json = new JSONObject().put("recommendations", resultHM.keySet());
+        } catch (NullPointerException e) {
+            json = new JSONObject().put("recommendations", rec);
         }
-        Map<String, Integer> resultHM = new LinkedHashMap<>();
-
-        uniqueItems.entrySet().stream()
-                .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
-                .forEachOrdered(x -> resultHM.put(x.getKey(), x.getValue()));
-
-        JSONObject json = new JSONObject().put("recommendations", resultHM.keySet());
         return json;
     }
 
 //    public static void main(String[] args) {
 //        UserDaoMem a = UserDaoMem.getInstance();
 //        a.save("page1", "user1", "1");
-//
+////
 //        a.save("page1", "user1", "2");
-//
+////
 //        a.save("page1", "user1", "3");
-//
+////
 //        a.save("page1", "user2", "1");
 //        a.save("page1", "user2", "4");
 //        a.save("page1", "user2", "5");
-//
+////
 //        a.save("page1", "user3", "1");
 //        a.save("page1", "user3", "2");
 //        a.save("page1", "user3", "8");
+//        a.save("page1", "user3", "8");
+//        a.save("page1", "user3", "8");
+//        a.save("page1", "user3", "8");
+//        a.save("page1", "user3", "8");
+//        a.save("page1", "user3", "8");
+//        a.save("page1", "user3", "8");
 //        a.save("page1", "user3", "5");
-//
+////
 //        a.save("page1", "user4", "a");
 //        a.save("page1", "user4", "b");
 //        a.save("page1", "user4", "c");
