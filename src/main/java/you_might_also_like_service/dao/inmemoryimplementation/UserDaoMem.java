@@ -14,14 +14,25 @@ public class UserDaoMem implements UserDao{
         return ourInstance;
     }
 
-    public ArrayList<User> getDATA() {
-        return DATA;
-    }
-
     private ArrayList<User> DATA;
 
     private UserDaoMem() {
         DATA = new ArrayList<User>();
+    }
+
+    public ArrayList<User> getDATA() {
+        return DATA;
+    }
+
+    @Override
+    public User find(String accessToken, String userId) {
+        User user = null;
+        for (User element: DATA) {
+            if (element.getAccessToken().equals(accessToken) && element.getUserID().equals(userId)) {
+                user = element;
+            }
+        }
+        return user;
     }
 
     @Override
@@ -50,20 +61,9 @@ public class UserDaoMem implements UserDao{
                 }
             }
         } catch (NullPointerException e) {
-//            no access token and user ID matched
+//            No access token and user ID matched.
         }
         return users;
-    }
-
-    @Override
-    public User find(String accessToken, String userId) {
-        User user = null;
-        for (User element: DATA) {
-            if (element.getAccessToken().equals(accessToken) && element.getUserID().equals(userId)) {
-                user = element;
-            }
-        }
-        return user;
     }
 
     @Override
