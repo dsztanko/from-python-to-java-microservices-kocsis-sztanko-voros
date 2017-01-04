@@ -7,6 +7,8 @@ import you_might_also_like_service.model.User;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class YouMightAlsoLikeAPIService {
     private static YouMightAlsoLikeAPIService ourInstance = new YouMightAlsoLikeAPIService();
@@ -43,16 +45,21 @@ public class YouMightAlsoLikeAPIService {
                 }
             }
         }
-        JSONObject json = new JSONObject(uniqueItems);
+        Map<String, Integer> resultHM = new LinkedHashMap<>();
+
+        uniqueItems.entrySet().stream()
+                .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
+                .forEachOrdered(x -> resultHM.put(x.getKey(), x.getValue()));
+
+        JSONObject json = new JSONObject().put("recommendations", resultHM.keySet());
         return json;
     }
 
 //    public static void main(String[] args) {
-//        HashMap<String, Integer> al;
 //        UserDaoMem a = UserDaoMem.getInstance();
 //        a.save("page1", "user1", "1");
 //
-//        a.save("page2", "user1", "2");
+//        a.save("page1", "user1", "2");
 //
 //        a.save("page1", "user1", "3");
 //
@@ -71,5 +78,5 @@ public class YouMightAlsoLikeAPIService {
 //        YouMightAlsoLikeAPIService b = new YouMightAlsoLikeAPIService();
 //        System.out.println(b.getRecommendations("page1", "user1"));
 //        System.out.println(a.selectByCartItems("page1", "user1"));
-    }
+//    }
 }
