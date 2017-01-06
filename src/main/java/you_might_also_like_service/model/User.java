@@ -2,6 +2,8 @@ package you_might_also_like_service.model;
 
 import java.util.HashSet;
 
+/* This class represents a User */
+
 public class User {
     private String accessToken;
     private String userID;
