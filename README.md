@@ -25,6 +25,8 @@ Parameters that needs to be added: accessToken, userId
 
 Both routes have parameters which has to be added to the basic URL with addParams() method. Access token is chosen by developers. Use always the same access token if you'd like to get back valid recommendations. Access token identifies your web page.
 #####Guide to use it in the web shop project
+Run the main() method of you_might_also_like_service.YouMightAlsoLikeServer.java file!
+
 Building and triggering URL is advised every time when 'Add to cart' button is clicked. Saving stores Users and updates their carts, meanwhile selecting returns a JSON file with the following format: 
 
 {"recommendations": ["5", "2", "1"]}
