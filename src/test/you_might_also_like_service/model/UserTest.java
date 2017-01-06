@@ -26,17 +26,17 @@ public class UserTest {
     }
 
     @Test
-    public void getItems() throws Exception {
+    public void testGetItems() throws Exception {
         assertEquals(3, testUser.getItems().size());
     }
 
     @Test
-    public void getAccessToken() throws Exception {
+    public void testGetAccessToken() throws Exception {
         assertEquals(accessToken, testUser.getAccessToken());
     }
 
     @Test
-    public void getUserID() throws Exception {
+    public void testGetUserID() throws Exception {
         assertEquals(userId, testUser.getUserID());
     }
 
