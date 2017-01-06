@@ -9,6 +9,8 @@ import you_might_also_like_service.model.User;
 
 import java.util.*;
 
+/* This class contains mainly the logic of YouMightAlsoLikeAPIService*/
+
 public class YouMightAlsoLikeAPIService {
     private static final Logger logger = LoggerFactory.getLogger(YouMightAlsoLikeAPIService.class);
 
