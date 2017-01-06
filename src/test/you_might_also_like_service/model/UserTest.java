@@ -44,5 +44,7 @@ public class UserTest {
     public void tearDown() throws Exception {
         testUser = null;
         cart = null;
+        accessToken = null;
+        userId = null;
     }
 }
