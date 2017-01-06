@@ -7,6 +7,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 
+/* Implementation which stores in computer's memory */
+
 public class UserDaoMem implements UserDao{
     private static UserDaoMem ourInstance = new UserDaoMem();
 
@@ -24,6 +26,7 @@ public class UserDaoMem implements UserDao{
         return DATA;
     }
 
+    // finds specUser - person, whose cart is the benchmark as opposed to the others' - in storage
     @Override
     public User find(String accessToken, String userId) {
         User user = null;
@@ -35,6 +38,7 @@ public class UserDaoMem implements UserDao{
         return user;
     }
 
+    // saves user
     @Override
     public void save(String accessToken, String userID, String item) {
         User user = find(accessToken, userID);
@@ -47,8 +51,9 @@ public class UserDaoMem implements UserDao{
         }
     }
 
+    // selects all the users whose cart items contains one of the specUser's cartItem
     @Override
-    public ArrayList<User> selectByCartItems(String accessToken, String userId) {
+    public ArrayList<User> containsOneOfTheSpecItemsAtLeast(String accessToken, String userId) {
         ArrayList users = new ArrayList();
         try {
             HashSet<String> items = find(accessToken, userId).getItems();
@@ -66,10 +71,11 @@ public class UserDaoMem implements UserDao{
         return users;
     }
 
+    // selects all items that are unique among users selected by containsOneOfTheSpecItemsAtLeast() method
     @Override
     public HashMap<String, Integer> selectUniqueItems(String accessToken, User specUser) {
         HashSet <String> uniqueItemsSet= new HashSet<>();
-        for (User user: selectByCartItems(accessToken, specUser.getUserID())) {
+        for (User user: containsOneOfTheSpecItemsAtLeast(accessToken, specUser.getUserID())) {
             if (user.getAccessToken().equals(accessToken)) {
                 uniqueItemsSet.addAll(user.getItems());
             }
