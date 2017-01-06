@@ -30,7 +30,7 @@ public class YouMightAlsoLikeAPIService {
 
     public void saveUser(String accessToken, String userID, String item) {
         userDao.save(accessToken, userID, item);
-        logger.debug(">>>>> User with the following credentials saved: {}, {}, {}", accessToken, userID, item);
+        logger.debug(">>>>> User with the following credentials saved: Access Token: {}, User ID: {}, Item: {}", accessToken, userID, item);
         logger.info(">>>>> User saved");
     }
 
