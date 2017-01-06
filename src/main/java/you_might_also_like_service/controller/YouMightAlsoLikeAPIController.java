@@ -4,6 +4,8 @@ import spark.Request;
 import spark.Response;
 import you_might_also_like_service.service.YouMightAlsoLikeAPIService;
 
+/* This class is responsible for handling data extracted from the URL. */
+
 public class YouMightAlsoLikeAPIController {
     public static final String ACCESS_TOKEN_PARAM_KEY = "accessToken";
     public static final String USER_ID_PARAM_KEY = "userId";
