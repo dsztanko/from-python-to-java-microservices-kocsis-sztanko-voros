@@ -11,6 +11,8 @@ import static spark.Spark.exception;
 import static spark.Spark.port;
 import static spark.Spark.get;
 
+/* Responsible for running the server of the MicroService */
+
 public class YouMightAlsoLikeServer {
     private static final Logger logger = LoggerFactory.getLogger(YouMightAlsoLikeServer.class);
 
