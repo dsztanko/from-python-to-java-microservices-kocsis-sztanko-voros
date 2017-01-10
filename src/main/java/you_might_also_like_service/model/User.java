@@ -16,9 +16,9 @@ public class User {
 
     /**
      *
-     * @param accessToken uniquely identifies a web-page
-     * @param userID unique attribute which identifies a User
-     * @param items represents the User's temporary storage, the cart in this case
+     * @param accessToken uniquely identifies a web-page.
+     * @param userID unique attribute which identifies a User.
+     * @param items represents the User's temporary storage, the cart in case of the web-shop project.
      */
     public User(String accessToken, String userID, HashSet<String> items) {
         this.accessToken = accessToken;
@@ -26,14 +26,26 @@ public class User {
         this.items = items;
     }
 
+    /**
+     * Gets the cart of this User.
+     * @return this User's name.
+     */
     public HashSet<String> getItems() {
         return items;
     }
 
+    /**
+     * Gets the accessToken (web-page identifier) of this User.
+     * @return this User's accessToken.
+     */
     public String getAccessToken() {
         return accessToken;
     }
 
+    /**
+     * Gets the ID of this User.
+     * @return this User's ID.
+     */
     public String getUserID() {
         return userID;
     }
