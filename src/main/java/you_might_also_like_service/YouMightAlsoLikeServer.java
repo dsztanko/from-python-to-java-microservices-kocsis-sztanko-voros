@@ -13,6 +13,7 @@ import static spark.Spark.get;
 
 /**
  * <h1>YouMightAlsoLike API MicroService</h1>
+ * <h2>Created by team GIT_Egylet</h2>
  * Responsible for running the server of the MicroService
  * called YouMightAlsoLike.
  *
