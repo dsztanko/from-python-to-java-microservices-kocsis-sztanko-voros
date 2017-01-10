@@ -13,9 +13,9 @@ import java.util.HashSet;
 /**
  * Implementation which stores in computer's memory.
  *
- * @author  dsztanko
+ * @author dsztanko
  * @version 1.0
- * @since   2017-01-10
+ * @since 2017-01-10
  * @see User
  * @see UserDao
  */
