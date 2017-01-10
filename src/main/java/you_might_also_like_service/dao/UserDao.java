@@ -8,14 +8,12 @@ import java.util.HashMap;
 /**
  * This interface is used to simplify User storage logic.
  * One implementation is available: saving in memory
- * Optional: JDBC (saving in database)
  *
  * @author  dsztanko
  * @version 1.0
  * @since   2017-01-10
  * @see User
  * @see you_might_also_like_service.dao.inmemoryimplementation.UserDaoMem
- * @see you_might_also_like_service.dao.JDBCimplementation.UserDaoJDBC
 
  */
 public interface UserDao {
