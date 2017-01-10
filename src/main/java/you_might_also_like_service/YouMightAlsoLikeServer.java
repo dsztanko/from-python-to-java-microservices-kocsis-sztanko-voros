@@ -11,13 +11,27 @@ import static spark.Spark.exception;
 import static spark.Spark.port;
 import static spark.Spark.get;
 
-/* Responsible for running the server of the MicroService */
-
+/**
+ * Responsible for running the server of the MicroService
+ * called YouMightAlsoLike.
+ *
+ * @author dsztanko
+ * @version 1.0
+ * @since 2017-01-10
+ * @see YouMightAlsoLikeAPIController
+ * @see YouMightAlsoLikeAPIService
+ */
 public class YouMightAlsoLikeServer {
     private static final Logger logger = LoggerFactory.getLogger(YouMightAlsoLikeServer.class);
 
     private YouMightAlsoLikeAPIController controller;
 
+    /**
+     * Consists of port set, end-points and exceptions
+     * of the API.
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         logger.debug(">>>>> Server started to run: {}", YouMightAlsoLikeServer.class.getName());
 
