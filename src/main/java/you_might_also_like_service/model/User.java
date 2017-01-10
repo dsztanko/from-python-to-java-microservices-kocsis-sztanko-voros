@@ -5,9 +5,9 @@ import java.util.HashSet;
 /**
  * This class represents a User.
  *
- * @author  dsztanko
+ * @author dsztanko
  * @version 1.0
- * @since   2017-01-10
+ * @since 2017-01-10
  */
 public class User {
     private String accessToken;
