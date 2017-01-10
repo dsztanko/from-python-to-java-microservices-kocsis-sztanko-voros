@@ -9,31 +9,66 @@ import you_might_also_like_service.model.User;
 
 import java.util.*;
 
-/* This class contains mainly the logic of YouMightAlsoLikeAPIService*/
-
+/**
+ * This class contains mainly the logic
+ * of YouMightAlsoLikeAPIService.
+ *
+ * @author dsztanko
+ * @version 1.0
+ * @since 2017-01-10
+ * @see you_might_also_like_service.YouMightAlsoLikeServer
+ * @see you_might_also_like_service.controller.YouMightAlsoLikeAPIController
+ */
 public class YouMightAlsoLikeAPIService {
     private static final Logger logger = LoggerFactory.getLogger(YouMightAlsoLikeAPIService.class);
 
     private static YouMightAlsoLikeAPIService ourInstance = new YouMightAlsoLikeAPIService();
+    private UserDao userDao;
+
     private static final int BASE_INDEX = 3;
     private static final int RECOMMENDATION_RANGE = 4;
 
+    /**
+     * Gets the only existing YouMightAlsoLikeAPIService object - serving singleton pattern.
+     * @return only instance of YouMightAlsoLikeAPIService
+     */
     public static YouMightAlsoLikeAPIService getInstance() {
         return ourInstance;
     }
-
-    private UserDao userDao;
 
     private YouMightAlsoLikeAPIService() {
         userDao = UserDaoMem.getInstance();
     }
 
+    /**
+     * Saving User object into storage.
+     *
+     * @param accessToken
+     * @param userID
+     * @param item ID given as newly added item/product.
+     */
     public void saveUser(String accessToken, String userID, String item) {
         userDao.save(accessToken, userID, item);
         logger.debug(">>>>> User with the following credentials saved: Access Token: {}, User ID: {}, Item: {}", accessToken, userID, item);
         logger.info(">>>>> User saved");
     }
 
+    /**
+     * Main purpose of the whole microservice placed here.
+     * Recommendations are handed over as an answer to the
+     * request.
+     *
+     * @param accessToken
+     * @param userId
+     * @return JSON with keyword 'recommendation'.
+     * Example:
+     *      {
+     *          "recommendations": ["5", "8", "2"]
+     *      }
+     * Result is sorted.
+     * The most important item is the first one.
+     * Number of sent-back items are maximized in 3.
+     */
     public JSONObject getRecommendations(String accessToken, String userId) {
         logger.info(">>>>> Recommendation requested");
 
