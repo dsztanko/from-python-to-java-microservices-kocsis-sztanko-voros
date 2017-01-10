@@ -10,28 +10,44 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 
-/* Implementation which stores in computer's memory */
-
+/**
+ * Implementation which stores in computer's memory.
+ *
+ * @author  dsztanko
+ * @version 1.0
+ * @since   2017-01-10
+ * @see User
+ * @see UserDao
+ */
 public class UserDaoMem implements UserDao {
     private static final Logger logger = LoggerFactory.getLogger(UserDaoMem.class);
-
+    private ArrayList<User> DATA;
     private static UserDaoMem ourInstance = new UserDaoMem();
 
+    /**
+     * Private constructor which is responsible for initializing
+     * memory storage in shape of an ArrayList.
+     */
+    private UserDaoMem() {
+        DATA = new ArrayList<>();
+    }
+
+    /**
+     * Gets the only existing UserDaoMem object - serving singleton pattern.
+     * @return only instance of UserDaoMem
+     */
     public static UserDaoMem getInstance() {
         return ourInstance;
     }
 
-    private ArrayList<User> DATA;
-
-    private UserDaoMem() {
-        DATA = new ArrayList<User>();
-    }
-
-    public ArrayList<User> getDATA() {
-        return DATA;
-    }
-
-    // finds specUser - person, whose cart is the benchmark as opposed to the others' - in storage
+    /**
+     * Finds specUser in memory storage - User, whose cart is the benchmark
+     * as opposed to the others'.
+     *
+     * @param accessToken
+     * @param userId
+     * @return User - found in memory storage by id.
+     */
     @Override
     public User find(String accessToken, String userId) {
         logger.info(">>>>> Looking for a certain User in the storage.");
@@ -47,7 +63,13 @@ public class UserDaoMem implements UserDao {
         return user;
     }
 
-    // saves user into storage
+    /**
+     * Saves user into memory storage.
+     *
+     * @param accessToken
+     * @param userID
+     * @param item
+     */
     @Override
     public void save(String accessToken, String userID, String item) {
         logger.info(">>>>> Saving process just started.");
@@ -63,7 +85,15 @@ public class UserDaoMem implements UserDao {
         }
     }
 
-    // selects all the users whose cart items contains one of the specUser's cartItem
+    /**
+     * Selects all the Users from memory storage
+     * whose cart items
+     * contains one of the specUser's (reference User) cartItems - at least once.
+     *
+     * @param accessToken
+     * @param userId
+     * @return
+     */
     @Override
     public ArrayList<User> containsOneOfTheSpecItemsAtLeast(String accessToken, String userId) {
         logger.info(">>>>> Collecting all users, whose cart contains one of the specUser's items just started.");
@@ -86,7 +116,14 @@ public class UserDaoMem implements UserDao {
         return users;
     }
 
-    // selects all items that are unique among users selected by containsOneOfTheSpecItemsAtLeast() method
+    /**
+     * Selects all items that are unique among Users
+     * selected by containsOneOfTheSpecItemsAtLeast() method.
+     *
+     * @param accessToken
+     * @param specUser refers to the reference User
+     * @return
+     */
     @Override
     public HashMap<String, Integer> selectUniqueItems(String accessToken, User specUser) {
         logger.info(">>>>> Selecting unique items just started.");
