@@ -12,6 +12,7 @@ import static spark.Spark.port;
 import static spark.Spark.get;
 
 /**
+ * <h1>YouMightAlsoLike API MicroService</h1>
  * Responsible for running the server of the MicroService
  * called YouMightAlsoLike.
  *
